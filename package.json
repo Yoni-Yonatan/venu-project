@@ -1,0 +1,15 @@
+{
+    "name": "trustmarket",
+    "version": "1.0.0",
+    "description": "TrustMarket — monorepo root",
+    "private": true,
+    "scripts": {
+        "dev": "concurrently \"npm run dev:backend\" \"npm run dev:client\"",
+        "dev:backend": "npm --prefix backend run dev",
+        "dev:client": "npm --prefix frontend run dev",
+        "install:all": "npm --prefix backend install && npm --prefix frontend install"
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.2"
+    }
+}
