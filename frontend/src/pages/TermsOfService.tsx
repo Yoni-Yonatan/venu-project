@@ -1,4 +1,3 @@
-import React from 'react';
 import { AlertTriangle, Handshake, Gavel } from 'lucide-react';
 
 export function TermsOfService() {
@@ -11,7 +10,7 @@ export function TermsOfService() {
 
                     <div className="prose prose-lg text-gray-600">
                         <p className="lead">
-                            Welcome to <strong>TrustMarket</strong>. By accessing our platform, you agree to these Terms. TrustMarket is a Peer-to-Peer marketplace operating in Ethiopia.
+                            Welcome to <strong>Venu Market</strong>. By accessing our platform, you agree to these Terms. Venu Market is a Peer-to-Peer marketplace operating in Ethiopia.
                         </p>
 
                         <h3 className="flex items-center gap-2 text-gray-900 mt-8 mb-4">
@@ -19,7 +18,7 @@ export function TermsOfService() {
                             1. Nature of the Platform
                         </h3>
                         <p>
-                            TrustMarket is a venue that connects buyers and sellers. <strong>We are not a party to any transaction</strong> between users. We do not own, sell, or inspect the items (except for "Official Store" partners where specified).
+                            Venu Market is a venue that connects buyers and sellers. <strong>We are not a party to any transaction</strong> between users. We do not own, sell, or inspect the items (except for "Official Store" partners where specified).
                         </p>
 
                         <h3 className="flex items-center gap-2 text-gray-900 mt-8 mb-4">
@@ -27,10 +26,10 @@ export function TermsOfService() {
                             2. Payments & Safety
                         </h3>
                         <p>
-                            <strong>Cash on Delivery (CoD) Only:</strong> Currently, TrustMarket does not process payments. All transactions are handled directly between users via Cash or Bank Transfer upon meeting.
+                            <strong>Cash on Delivery (CoD) Only:</strong> Currently, Venu Market does not process payments. All transactions are handled directly between users via Cash or Bank Transfer upon meeting.
                         </p>
                         <div className="bg-amber-50 border-l-4 border-amber-500 p-4 my-4">
-                            <strong>Safety Warning:</strong> You agree to meet in safe, public locations (e.g., malls, cafes) during daylight hours. Do NOT transfer money before visually inspecting the item. TrustMarket is not liable for financial loss or physical harm.
+                            <strong>Safety Warning:</strong> You agree to meet in safe, public locations (e.g., malls, cafes) during daylight hours. Do NOT transfer money before visually inspecting the item. Venu Market is not liable for financial loss or physical harm.
                         </div>
 
                         <h3 className="flex items-center gap-2 text-gray-900 mt-8 mb-4">

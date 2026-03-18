@@ -10,7 +10,6 @@ interface VerificationRequest {
     username: string;
     email: string;
     id_image_url: string;
-    selfie_image_url: string;
     status: 'Pending' | 'Approved' | 'Rejected';
 }
 
@@ -77,18 +76,19 @@ export function AdminVerify() {
                                         </span>
                                     </div>
 
-                                    <div className="grid grid-cols-2 gap-4 mb-6">
-                                        <div>
-                                            <p className="text-xs font-bold text-gray-400 uppercase mb-2">Government ID</p>
-                                            <div className="bg-gray-100 rounded-lg aspect-video overflow-hidden">
-                                                <img src={req.id_image_url} alt="ID" className="w-full h-full object-cover" />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <p className="text-xs font-bold text-gray-400 uppercase mb-2">Selfie</p>
-                                            <div className="bg-gray-100 rounded-lg aspect-square overflow-hidden w-1/2">
-                                                <img src={req.selfie_image_url} alt="Selfie" className="w-full h-full object-cover" />
-                                            </div>
+                                    <div className="mb-6 max-w-lg">
+                                        <p className="text-xs font-bold text-gray-400 uppercase mb-2">Submitted Document (ID or Business License)</p>
+                                        <div className="bg-gray-100 rounded-lg aspect-auto overflow-hidden border border-gray-200">
+                                            {req.id_image_url.toLowerCase().endsWith('.pdf') ? (
+                                                <div className="p-8 text-center text-gray-500">
+                                                    <p className="mb-4">This document is a PDF.</p>
+                                                    <a href={req.id_image_url} target="_blank" rel="noreferrer" className="text-blue-500 underline">View PDF</a>
+                                                </div>
+                                            ) : (
+                                                <a href={req.id_image_url} target="_blank" rel="noreferrer">
+                                                    <img src={req.id_image_url} alt="Submitted Document" className="w-full h-auto max-h-96 object-contain bg-white" />
+                                                </a>
+                                            )}
                                         </div>
                                     </div>
 

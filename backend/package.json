@@ -1,7 +1,7 @@
 {
-    "name": "trustmarket-server",
+    "name": "venu-market-server",
     "version": "1.0.0",
-    "description": "Backend for TrustMarket",
+    "description": "Backend for Venu Market",
     "main": "index.js",
     "scripts": {
         "start": "node index.js",

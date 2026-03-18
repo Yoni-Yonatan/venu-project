@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CameraCapture } from '../components/CameraCapture';
 import { useStore } from '../store/useStore';
 import { useNavigate } from 'react-router-dom';
-import { Camera, Upload, Store, User as UserIcon, AlertTriangle } from 'lucide-react';
+import { Upload, Store, User as UserIcon, AlertTriangle } from 'lucide-react';
 
 export function Sell() {
     const { createProduct, user } = useStore();
@@ -34,7 +34,6 @@ export function Sell() {
     }
 
     const isStore = user.seller_type === 'store';
-    const isNew = formData.condition === 'new';
 
     // Logic: If Individual & Not New -> Camera Mandatory
     // If Store -> File Upload Allowed

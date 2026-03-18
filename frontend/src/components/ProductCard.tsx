@@ -1,5 +1,4 @@
-import React from 'react';
-import { ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import type { Product } from '../store/useStore';
 
@@ -44,7 +43,7 @@ export function ProductCard({ product }: ProductCardProps) {
             {/* Content Area */}
             <div className="p-5 flex flex-col flex-1">
                 <div className="flex justify-between items-start mb-2">
-                    <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{product.category}</p>
+                    <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{product.category_name}</p>
                     {isNew ? (
                         <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-100">WARRANTY</span>
                     ) : (
@@ -58,7 +57,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
                 <div className="mt-auto pt-4 border-t border-gray-50 flex items-center justify-between">
                     <div>
-                        <p className="text-xs text-gray-400 font-medium mb-0.5">Sold by {product.seller_name}</p>
+                        <p className="text-xs text-gray-400 font-medium mb-0.5">Sold by {product.seller_type === 'store' ? product.store_name : product.username}</p>
                         <div className="text-xl font-extrabold text-gray-900">
                             {new Intl.NumberFormat('en-ET', { style: 'currency', currency: 'ETB', maximumFractionDigits: 0 }).format(product.price)}
                         </div>

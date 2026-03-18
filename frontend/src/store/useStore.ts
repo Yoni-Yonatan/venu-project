@@ -25,10 +25,12 @@ export interface Product {
     price: number;
     description: string;
     category_name: string;
+    category?: string;
     image_url: string;
     condition: 'new' | 'used_like_new' | 'used_good' | 'used_fair';
     is_live_captured: boolean;
     username: string;
+    seller_name?: string;
     store_name?: string;
     seller_type: 'individual' | 'store';
     seller_trust_score?: number;
@@ -38,23 +40,48 @@ export interface Product {
     city?: string;
 }
 
+interface RegisterData {
+    username: string;
+    email: string;
+    password: string;
+    seller_type: 'individual' | 'store';
+    store_name?: string;
+    phone?: string;
+}
+
 interface StoreState {
     user: User | null;
     products: Product[];
     isLoading: boolean;
     login: (email: string, password: string) => Promise<void>;
+    register: (data: RegisterData | FormData) => Promise<void>;
     fetchProducts: (filters?: Record<string, string>) => Promise<void>;
     createProduct: (formData: FormData) => Promise<void>;
     logout: () => void;
+
+    isChatOpen: boolean;
+    activeChatProduct: Product | null;
+    openChat: (product: Product) => void;
+    closeChat: () => void;
 }
 
 export const useStore = create<StoreState>((set) => ({
     user: null,
     products: [],
     isLoading: false,
+    isChatOpen: false,
+    activeChatProduct: null,
 
     login: async (email, password) => {
         const res = await axios.post(`${API_URL}/auth/login`, { email, password });
+        set({ user: res.data.user });
+        localStorage.setItem('token', res.data.token);
+    },
+
+    register: async (data) => {
+        const isFormData = data instanceof FormData;
+        const headers = isFormData ? { 'Content-Type': 'multipart/form-data' } : { 'Content-Type': 'application/json' };
+        const res = await axios.post(`${API_URL}/auth/register`, data, { headers });
         set({ user: res.data.user });
         localStorage.setItem('token', res.data.token);
     },
@@ -88,4 +115,7 @@ export const useStore = create<StoreState>((set) => ({
         set({ user: null });
         localStorage.removeItem('token');
     },
+
+    openChat: (product) => set({ isChatOpen: true, activeChatProduct: product }),
+    closeChat: () => set({ isChatOpen: false, activeChatProduct: null }),
 }));

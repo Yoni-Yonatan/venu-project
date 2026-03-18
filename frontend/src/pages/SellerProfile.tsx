@@ -65,7 +65,7 @@ export function SellerProfile() {
 
                         <div className="flex gap-3">
                             <button className="px-6 py-2 bg-black text-white rounded-lg font-medium hover:bg-gray-800 transition">
-                                Contact Seller
+                                start chating
                             </button>
                         </div>
                     </div>

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingBag, Facebook, Twitter, Instagram } from 'lucide-react';
 
@@ -13,7 +12,7 @@ export function Footer() {
                             <div className="bg-black text-white p-1.5 rounded-lg">
                                 <ShoppingBag size={20} />
                             </div>
-                            <span className="font-bold text-xl tracking-tight text-gray-900">TrustMarket</span>
+                            <span className="font-bold text-xl tracking-tight text-gray-900">Venu Market</span>
                         </Link>
                         <p className="text-gray-500 max-w-sm mb-6">
                             Ethiopia's safest peer-to-peer marketplace.
@@ -48,7 +47,7 @@ export function Footer() {
                 </div>
 
                 <div className="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-400">
-                    <p>&copy; {new Date().getFullYear()} TrustMarket ET. All rights reserved.</p>
+                    <p>&copy; {new Date().getFullYear()} Venu Market ET. All rights reserved.</p>
                     <div className="flex gap-6">
                         <Link to="/privacy" className="hover:text-gray-600">Privacy</Link>
                         <Link to="/terms" className="hover:text-gray-600">Terms</Link>

@@ -1,29 +1,37 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useStore } from '../store/useStore';
 import { ProductCard } from '../components/ProductCard';
 import { ChevronDown, Filter } from 'lucide-react';
+import heroBg from '../assets/hero_bg.png';
 
 export function Home() {
     const { products, fetchProducts, isLoading } = useStore();
     const [selectedCategory, setSelectedCategory] = useState<string>('');
 
     useEffect(() => {
-        fetchProducts({ category: selectedCategory });
+        fetchProducts(selectedCategory ? { category: selectedCategory.toLowerCase().replace(/\s+/g, '-') } : {});
     }, [fetchProducts, selectedCategory]);
 
     return (
         <div className="min-h-screen bg-white pb-20">
             {/* Hero Section (Restored) */}
-            <div className="bg-white border-b border-gray-100 py-16 px-4 mb-4">
-                <div className="max-w-3xl mx-auto text-center">
-                    <h1 className="text-4xl font-extrabold text-primary mb-4 tracking-tight">
+            <div
+                className="relative bg-white border-b border-gray-100 py-48 px-4 mb-4 overflow-hidden -mt-28"
+                style={{
+                    backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.24)), url(${heroBg})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                }}
+            >
+                <div className="max-w-3xl mx-auto text-center relative z-10">
+                    <h1 className="text-4xl sm:text-5xl font-extrabold text-black mb-4 tracking-tight">
                         The Safest Place to Buy Used Tech.
                     </h1>
-                    <p className="text-lg text-secondary mb-8">
+                    <p className="text-lg sm:text-xl text-gray-800 mb-8 font-medium">
                         Verified sellers. Verified devices. No scams.
                     </p>
                     <div className="flex justify-center gap-4">
-                        <button className="bg-black text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition shadow-lg shadow-black/20">
+                        <button className="bg-black text-white px-8 py-4 rounded-full font-bold hover:bg-gray-800 transition shadow-xl shadow-black/30 text-lg">
                             Browse Marketplace
                         </button>
                     </div>
@@ -41,8 +49,8 @@ export function Home() {
                                 key={cat}
                                 onClick={() => setSelectedCategory(cat === 'All' ? '' : cat)}
                                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap ${(selectedCategory === cat || (cat === 'All' && !selectedCategory))
-                                        ? 'bg-black text-white shadow-md'
-                                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                    ? 'bg-black text-white shadow-md'
+                                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                                     }`}
                             >
                                 {cat}

@@ -53,4 +53,24 @@
   .pb-safe {
     padding-bottom: env(safe-area-inset-bottom);
   }
+
+  @keyframes slide-in-from-top {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-in {
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+  }
+
+  .slide-in-from-top {
+    animation-name: slide-in-from-top;
+  }
 }

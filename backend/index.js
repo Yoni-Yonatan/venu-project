@@ -17,13 +17,23 @@ app.use(cors());
 app.use(express.json());
 
 // ─── Database Pool ────────────────────────────────────────────────────────────
-const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    // For local dev without SSL:
-    ssl: process.env.DATABASE_URL && process.env.DATABASE_URL.includes('sslmode=require')
-        ? { rejectUnauthorized: false }
-        : false,
-});
+const pool = new Pool(
+    process.env.DATABASE_URL
+        ? {
+            connectionString: process.env.DATABASE_URL,
+            ssl: process.env.DATABASE_URL.includes('sslmode=require')
+                ? { rejectUnauthorized: false }
+                : false,
+        }
+        : {
+            host: process.env.DB_HOST || 'localhost',
+            port: parseInt(process.env.DB_PORT || '5432'),
+            user: process.env.DB_USERNAME || process.env.DB_USER || 'postgres',
+            password: process.env.DB_PASSWORD,
+            database: process.env.DB_DATABASE || 'postgres',
+            ssl: false,
+        }
+);
 
 pool.connect()
     .then(() => console.log('✅  Connected to PostgreSQL'))
@@ -46,7 +56,7 @@ const paginate = (req) => {
 // ══════════════════════════════════════════════════════════════════════════════
 
 // POST /api/auth/register
-app.post('/api/auth/register', async (req, res) => {
+app.post('/api/auth/register', upload.single('document'), async (req, res) => {
     const { username, email, password, seller_type, store_name, phone } = req.body;
     if (!username || !email || !password)
         return res.status(400).json({ message: 'username, email, and password are required.' });
@@ -58,13 +68,26 @@ app.post('/api/auth/register', async (req, res) => {
         if (existing.rowCount > 0)
             return res.status(409).json({ message: 'Email or username already taken.' });
 
+        const documentPath = req.file ? `uploads/${Date.now()}_${req.file.originalname}` : null;
+
         const result = await pool.query(
-            `INSERT INTO users (username, email, password_hash, seller_type, store_name, phone)
-             VALUES ($1, $2, $3, $4, $5, $6) RETURNING id, username, email, seller_type, store_name, trust_score, is_id_verified, role`,
+            `INSERT INTO users (username, email, password_hash, seller_type, store_name, phone, id_card_url)
+             VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id, username, email, seller_type, store_name, trust_score, is_id_verified, role`,
             [username, email, `hashed:${password}`, seller_type || 'individual',
-                seller_type === 'store' ? (store_name || `${username}'s Store`) : null, phone || null]
+                seller_type === 'store' ? (store_name || `${username}'s Store`) : null, phone || null, documentPath]
         );
-        res.status(201).json({ token: 'mock_jwt_token', user: result.rows[0] });
+
+        const newUser = result.rows[0];
+
+        if (documentPath) {
+            await pool.query(
+                `INSERT INTO verification_requests (user_id, id_image_url, selfie_image_url)
+                 VALUES ($1, $2, $3)`,
+                [newUser.id, documentPath, ''] // Leaving selfie_image_url empty or placeholder since we only require one document now
+            );
+        }
+
+        res.status(201).json({ token: 'mock_jwt_token', user: newUser });
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Server error during registration.' });
@@ -798,5 +821,5 @@ app.get('/api/admin/stats', async (req, res) => {
 
 // ──────────────────────────────────────────────────────────────────────────────
 app.listen(PORT, () => {
-    console.log(`🚀  TrustMarket server running on http://localhost:${PORT}`);
+    console.log(`🚀  Venu Market server running on http://localhost:${PORT}`);
 });

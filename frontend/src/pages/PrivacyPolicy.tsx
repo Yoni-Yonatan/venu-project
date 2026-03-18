@@ -1,4 +1,3 @@
-import React from 'react';
 import { Shield, Lock, Eye } from 'lucide-react';
 
 export function PrivacyPolicy() {
@@ -11,7 +10,7 @@ export function PrivacyPolicy() {
 
                     <div className="prose prose-lg text-gray-600">
                         <p className="lead">
-                            At <strong>TrustMarket</strong> ("we", "our", or "us"), we prioritize your trust. This Privacy Policy outlines how we collect, use, and protect your information when you use our Peer-to-Peer marketplace in Ethiopia.
+                            At <strong>Venu Market</strong> ("we", "our", or "us"), we prioritize your trust. This Privacy Policy outlines how we collect, use, and protect your information when you use our Peer-to-Peer marketplace in Ethiopia.
                         </p>
 
                         <h3 className="flex items-center gap-2 text-gray-900 mt-8 mb-4">
@@ -29,7 +28,7 @@ export function PrivacyPolicy() {
                             <Lock size={24} className="text-emerald-600" />
                             2. How We Use Your Information
                         </h3>
-                        <p>We use your data solely to operate and improve TrustMarket:</p>
+                        <p>We use your data solely to operate and improve Venu Market:</p>
                         <ul className="list-disc pl-6 space-y-2">
                             <li><strong>Verification Service:</strong> To verify your identity and award you the "Verified Seller" badge, reducing scams.</li>
                             <li><strong>Marketplace Operations:</strong> To display your listings and facilitate failed/successful transaction records.</li>
@@ -55,7 +54,7 @@ export function PrivacyPolicy() {
 
                         <h3 className="text-gray-900 mt-8 mb-4">5. Contact Us</h3>
                         <p>
-                            If you have questions about this policy, please contact us at <a href="mailto:privacy@trustmarket.et" className="text-blue-600 underline">privacy@trustmarket.et</a>.
+                            If you have questions about this policy, please contact us at <a href="mailto:privacy@venumarket.et" className="text-blue-600 underline">privacy@venumarket.et</a>.
                         </p>
                     </div>
                 </div>

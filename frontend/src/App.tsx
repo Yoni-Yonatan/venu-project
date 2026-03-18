@@ -9,7 +9,12 @@ import { SellerProfile } from './pages/SellerProfile';
 import { AdminVerify } from './pages/AdminVerify';
 import { PrivacyPolicy } from './pages/PrivacyPolicy';
 import { TermsOfService } from './pages/TermsOfService';
+import { RegisterChoice } from './pages/RegisterChoice';
+import { RegisterBuyer } from './pages/RegisterBuyer';
+import { RegisterSeller } from './pages/RegisterSeller';
+import { PendingVerification } from './pages/PendingVerification';
 import { useStore } from './store/useStore';
+import { ChatWindow } from './components/ChatWindow';
 
 // Login Page
 const Login = () => {
@@ -69,11 +74,6 @@ const Login = () => {
   );
 };
 
-const Register = () => (
-  <div className="min-h-screen flex items-center justify-center pt-20 text-center text-gray-500">
-    Register Page (Coming Soon)
-  </div>
-);
 
 const Profile = () => (
   <div className="min-h-screen flex items-center justify-center pt-20 text-center text-gray-500">
@@ -86,14 +86,17 @@ function App() {
     <Router>
       <div className="min-h-screen bg-white flex flex-col text-gray-900 font-sans">
         <Navbar />
-        <div className="flex-1">
+        <div className="flex-1 pt-28">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/sell" element={<Sell />} />
             <Route path="/item/:id" element={<ItemDetails />} />
             <Route path="/seller/:id" element={<SellerProfile />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/register" element={<RegisterChoice />} />
+            <Route path="/register-buyer" element={<RegisterBuyer />} />
+            <Route path="/register-seller" element={<RegisterSeller />} />
+            <Route path="/pending-verification" element={<PendingVerification />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/admin/verify" element={<AdminVerify />} />
             {/* Legal Routes */}
@@ -104,6 +107,7 @@ function App() {
           </Routes>
         </div>
         <Footer />
+        <ChatWindow />
       </div>
     </Router>
   );

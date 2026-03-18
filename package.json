@@ -1,7 +1,7 @@
 {
-    "name": "trustmarket",
+    "name": "venu-market",
     "version": "1.0.0",
-    "description": "TrustMarket — monorepo root",
+    "description": "Venu Market — monorepo root",
     "private": true,
     "scripts": {
         "dev": "concurrently \"npm run dev:backend\" \"npm run dev:client\"",

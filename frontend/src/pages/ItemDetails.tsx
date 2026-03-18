@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ShieldCheck, MessageCircle, ArrowLeft, Store } from 'lucide-react';
 import { useStore } from '../store/useStore';
@@ -6,7 +6,7 @@ import type { Product } from '../store/useStore';
 
 export function ItemDetails() {
     const { id } = useParams();
-    const { products, fetchProducts } = useStore();
+    const { products, fetchProducts, openChat } = useStore();
     const [item, setItem] = useState<Product | null>(null);
 
     useEffect(() => {
@@ -81,9 +81,12 @@ export function ItemDetails() {
                                 )}
                             </div>
 
-                            <button className="w-full bg-black text-white py-4 rounded-xl font-bold text-lg hover:bg-gray-800 transition flex items-center justify-center gap-2">
+                            <button
+                                onClick={() => openChat(item)}
+                                className="w-full bg-black text-white py-4 rounded-xl font-bold text-lg hover:bg-gray-800 transition flex items-center justify-center gap-2"
+                            >
                                 <MessageCircle size={20} />
-                                {item.seller_type === 'store' ? 'Contact Support' : 'Chat with Seller'}
+                                Start chatting
                             </button>
 
                             {item.seller_type === 'individual' && item.condition !== 'new' && (
